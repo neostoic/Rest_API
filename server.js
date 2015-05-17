@@ -115,7 +115,7 @@ router.route('/search')
        console.log('API failed to answer -  syntax error in url parameters.');
 
       }
-    else if (typeof req.query.radius != "undefined" &&  (!(/^\d+$/.test(req.query.radius)) || req.query.radius > 50000) )//check if radius exists and waht value it has, over 50000 is not allowed
+    else if (typeof req.query.radius != "undefined" &&  (!(/^\d+$/.test(req.query.radius)) || req.query.radius > 40000) )//check if radius exists and waht value it has, over 40000 is not allowed
       {
           res.json({ error: 'Radius has a max limit on 50.000' });
           console.log('API failed to answer -  syntax error in url parameters.');

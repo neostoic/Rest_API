@@ -27,7 +27,8 @@ var VenueSchema   = new Schema({
       checkins:Number,//only from Foursquare
       poweredBy: [String], // name of the APIs used
       timestamp: Number,//timestamp of the request
-      openNow: Boolean
+      openNow: Boolean,
+      phone: String
     }
 
 });

@@ -98,6 +98,44 @@ module.exports = {
 
           return fq_data;// return venues_matching function
 
+        },
+  yelp: function(input,coord)
+        {
+          var timestamp = Math.round((new Date()).getTime() / 1000);
+
+          var y_data = []; //this array holds the objects of the fourquare data
+
+          for(i=0;i<input.length;i++)
+          {
+          var ye = new Venue();
+
+          ye.other.timestamp=timestamp;
+
+          ye.distance = Math.round(location_matching(coord[0],coord[1],input[i].location.coordinate.latitude,input[i].location.coordinate.longitude));
+          ye.other.poweredBy="Yelp";
+
+          if (typeof input[i].rating != "undefined")
+            {
+              ye.rating=input[i].rating*2;
+            }
+
+          if (typeof input[i].phone != "undefined")
+            {
+              ye.other.phone=input[i].phone;
+            }
+
+
+          ye.location.lon=input[i].location.coordinate.longitude;
+          ye.location.lat=input[i].location.coordinate.latitude;
+          ye.location.address=input[i].location.display_address[0] + ", " + input[i].location.city;
+
+          ye.name=input[i].name;
+
+          y_data.push(ye);
+          }
+
+          return y_data;// return venues_matching function
+
         }
 
 };

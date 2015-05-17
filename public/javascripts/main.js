@@ -11,7 +11,6 @@
 ///// -add Yelp
 ///// -create recommendation algorithm (rank by best(default), distance(km and mins), price)
 ///// -create system architecture using mongo (semantics)
-///// -git it
 ///// -put it online if possible
 /////
 //###############################################################
@@ -22,6 +21,13 @@ var async = require("async");
 var request = require("request");
 var GooglePlaces = require("googleplaces");
 var mapping = require("./mapping.js");
+var yelp = require("yelp").createClient
+     ({
+       consumer_key: "KqaH919E97OcBjvwSdmNOA",
+       consumer_secret: "EdrY8mUdX2FrW8bfzwuGc5sHVhQ",
+       token: "b88_Jj3xFQfP1JPtEgKxXa_WVcdlPVe4",
+       token_secret: "eUQ94vBmJEbE_OUoluHmz7e7HZM"
+     });
 
 
 //export the main function
@@ -51,10 +57,20 @@ module.exports = {
       };
 
 
+
+      var yelp_param = {
+        term : params.query,
+        limit:20,
+        ll:params.location,
+        radius_filter:'10000'
+      };
+
+
     if (typeof params.radius != "undefined")
       {
       foursquare_param.radius=params.radius;
       google_param.radius=params.radius;
+      yelp_param.radius_filter= params.radius;
       }
 
 
@@ -108,18 +124,47 @@ module.exports = {
             });
 
         },
+        yelp_data: function(callback){
+            console.log('Yelp loading...');
+
+
+
+            yelp.search(yelp_param, function(err, data) {
+              if(err) { console.log(err); return; }
+              else {
+                    var map =[];
+                      map = mapping.yelp(data.businesses,coordinates);
+
+                      callback(null, map);
+
+                      hrend6 = process.hrtime(hrstart2);
+                      console.log("Yelp COMPLETE in : %ds %dms", hrend6[0], hrend6[1]/1000000);
+                    }
+            });
+
+        },
         matching: ['foursquare_data', 'google_data', function(callback, results){
 
           var hrstart5 = process.hrtime();
 
           var sendd = results.google_data;
-          var match =  matching.venues_matching(results.foursquare_data,results.google_data,0.45,40);
+          var match =  matching.venues_matching(results.foursquare_data,results.google_data,0.40,40);
 
           hrend5 = process.hrtime(hrstart5);
-          console.log("Matching and integration completed in : %ds %dms", hrend5[0], hrend5[1]/1000000);
+          console.log("Matching and integration (Foursquare - Google) completed in : %ds %dms", hrend5[0], hrend5[1]/1000000);
             callback(null, match);
         }],
-        recommendation: ['matching', function(callback, results){
+        matching2: ['matching', 'yelp_data', function(callback, results){
+
+          var hrstart5 = process.hrtime();
+
+          var match =  matching.venues_matching(results.matching,results.yelp_data,0.40,40);
+
+          hrend5 = process.hrtime(hrstart5);
+          console.log("Matching and integration (Old - Yelp) completed in : %ds %dms", hrend5[0], hrend5[1]/1000000);
+            callback(null, match);
+        }],
+        recommendation: ['matching2', function(callback, results){
 
             callback(null, 'recommend');
         }]
@@ -127,7 +172,7 @@ module.exports = {
       if(err)
         {console.log('err = ', err);}
       //  console.log('results = ', results);
-        callback({foursquare: results.foursquare_data , google: results.google_data ,integrated:results.matching}); // callback of main function
+        callback({foursquare: results.foursquare_data , google: results.google_data , yelp: results.yelp_data, integrated:results.matching}); // callback of main function
     });
 
 

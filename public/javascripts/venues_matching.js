@@ -96,6 +96,16 @@ module.exports = {
                     }
                   }
 
+
+                //phone check
+                if (typeof listA[i].other.phone == "undefined")
+                  {                  
+                    if ( listB[j].other.phone != "undefined")
+                    {
+                      listA[i].other.phone = listB[j].other.phone;
+                    }
+                  }
+
                   //powered field
                   listA[i].other.poweredBy.push(listB[j].other.poweredBy[0]);
 
