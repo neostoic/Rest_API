@@ -68,8 +68,8 @@ module.exports = {
                   }
                   else if (listA[i].other.poweredBy.length == 2)
                   {
-
-                    listA[i].rating = listB[j].rating/3 + listA[i].rating*2/3;
+                    var rounded2 = Math.round( (listB[j].rating/3 + listA[i].rating*2/3) * 10 ) / 10;
+                    listA[i].rating = rounded2;
 
                   }
                 }
@@ -99,7 +99,7 @@ module.exports = {
 
                 //phone check
                 if (typeof listA[i].other.phone == "undefined")
-                  {                  
+                  {
                     if ( listB[j].other.phone != "undefined")
                     {
                       listA[i].other.phone = listB[j].other.phone;
