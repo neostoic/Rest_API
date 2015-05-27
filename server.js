@@ -22,6 +22,7 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var Bear     = require('./models/bear');
 var Main     = require('./public/javascripts/main.js');
+var eval     = require('./public/javascripts/evaluate.js');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -160,6 +161,18 @@ router.route('/search')
 
 
     });
+
+//This is the get method that we will do the search on API for restorants
+router.route('/evaluate')
+
+    .get(function(req, res) {
+
+      eval.evaluate(req.query,function(data){
+        res.json(data);
+
+    });
+    });
+
 
 
 

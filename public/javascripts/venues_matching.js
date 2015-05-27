@@ -44,6 +44,23 @@ module.exports = {
               index_store.push(j);
               //Update the data in listA (integration)
 
+
+              //location
+              if (listB[j].other.poweredBy[0] == "Google")
+              {
+                listA[i].location.lat = listB[j].location.lat;
+                listA[i].location.lon = listB[j].location.lon;
+
+              }
+
+              //name
+              if (listB[j].other.poweredBy[0] == "Yelp" && listA[i].other.poweredBy[0] == "Google")
+              {
+                listA[i].name = listB[j].name;
+
+              }
+
+
               //rating
               if ( listA[i].rating == "undefined")
                 {

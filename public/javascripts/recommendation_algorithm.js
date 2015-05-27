@@ -98,7 +98,7 @@ module.exports = {
           }
 
 
-          console.log(index_store);
+        //  console.log(index_store);
           return ranked_list;
 
       }

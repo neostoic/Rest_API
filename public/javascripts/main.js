@@ -9,8 +9,6 @@
 /////
 ///// Tasks:
 ///// -create recommendation algorithm (rank by best(default), distance(km and mins), price)
-///// -fixed locations to find which API is more acurate on populating our schema
-///// -think about the evaluation
 ///// -put it online if possible
 /////
 //###############################################################
@@ -89,10 +87,33 @@ module.exports = {
 
       var hrstart2 = process.hrtime();
 
-
+      var original_yelp;
+      var original_foursquare;
+      var original_google;
 
     // controll flow of the functions
     async.auto({
+
+        yelp_data: function(callback){
+            console.log('Yelp loading...');
+            var hrstart77 = process.hrtime();
+
+
+
+            yelp.search(yelp_param, function(err, data) {
+              if(err) { console.log(err); return; }
+              else {
+                    original_yelp = data.businesses;
+                    var map =[];
+                      map = mapping.yelp(data.businesses,coordinates);
+                      callback(null, map);
+
+                      hrend6 = process.hrtime(hrstart77);
+                      console.log("Yelp COMPLETE in : %ds %dms", hrend6[0], hrend6[1]/1000000);
+                    }
+            });
+
+        },
         foursquare_data: function(callback){
             console.log('Foursquare loading...');
 
@@ -102,6 +123,7 @@ module.exports = {
                     if(err) { console.log(err); return; }
                     else {
                             var info = JSON.parse(body);
+                            original_foursquare = info.response.groups[0].items;
                             var map =[];
                              map = mapping.foursquare(info.response.groups[0].items,coordinates);
 
@@ -126,6 +148,7 @@ module.exports = {
             googlePlaces.placeSearch(google_param, function (error, response) {
                 if (error) throw error;
                 else {
+                    original_google = response.results;
                     var map =[];
                      map = mapping.google(response.results,coordinates);
 
@@ -138,32 +161,13 @@ module.exports = {
             });
 
         },
-        yelp_data: function(callback){
-            console.log('Yelp loading...');
-            var hrstart77 = process.hrtime();
 
-
-
-            yelp.search(yelp_param, function(err, data) {
-              if(err) { console.log(err); return; }
-              else {
-                    var map =[];
-                      map = mapping.yelp(data.businesses,coordinates);
-
-                      callback(null, map);
-
-                      hrend6 = process.hrtime(hrstart77);
-                      console.log("Yelp COMPLETE in : %ds %dms", hrend6[0], hrend6[1]/1000000);
-                    }
-            });
-
-        },
         matching: ['foursquare_data', 'google_data', function(callback, results){
 
           var hrstart5 = process.hrtime();
 
           var sendd = results.google_data;
-          var match =  matching.venues_matching(results.foursquare_data,results.google_data,0.40,40);
+          var match =  matching.venues_matching(results.foursquare_data,results.google_data,0.40,45);
 
           hrend5 = process.hrtime(hrstart5);
           console.log("Matching and integration (Foursquare - Google) completed in : %ds %dms", hrend5[0], hrend5[1]/1000000);
@@ -173,7 +177,7 @@ module.exports = {
 
           var hrstart5 = process.hrtime();
 
-          var match =  matching.venues_matching(results.matching,results.yelp_data,0.40,40);
+          var match =  matching.venues_matching(results.matching,results.yelp_data,0.40,45);
 
           hrend5 = process.hrtime(hrstart5);
           console.log("Matching and integration (Old - Yelp) completed in : %ds %dms", hrend5[0], hrend5[1]/1000000);
@@ -190,7 +194,7 @@ module.exports = {
       if(err)
         {console.log('err = ', err);}
       //  console.log('results = ', results);
-        callback({foursquare: results.foursquare_data , google: results.google_data , yelp: results.yelp_data, integrated:results.matching2, ranked:results.recommendation}); // callback of main function
+        callback({foursquare: original_foursquare , google: original_google , yelp: original_yelp, ranked:results.recommendation}); // callback of main function
     });
 
 
