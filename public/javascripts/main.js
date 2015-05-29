@@ -8,7 +8,6 @@
 /////
 /////
 ///// Tasks:
-///// -create recommendation algorithm (rank by best(default), distance(km and mins), price)
 ///// -put it online if possible
 /////
 //###############################################################
@@ -65,6 +64,16 @@ module.exports = {
       };
 
       var radius = 10000;
+      var limit = 20;
+
+    if (typeof params.limit != "undefined")
+      {
+        limit = params.limit;
+
+
+      }
+
+
     if (typeof params.radius != "undefined")
       {
       foursquare_param.radius=params.radius;
@@ -194,7 +203,9 @@ module.exports = {
       if(err)
         {console.log('err = ', err);}
       //  console.log('results = ', results);
-        callback({foursquare: original_foursquare , google: original_google , yelp: original_yelp, ranked:results.recommendation}); // callback of main function
+      var limited = results.recommendation.slice(0, limit);
+
+        callback({foursquare: original_foursquare , google: original_google , yelp: original_yelp, ranked:limited}); // callback of main function
     });
 
 

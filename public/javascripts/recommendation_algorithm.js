@@ -34,12 +34,22 @@ module.exports = {
               price:0
             };
           }
+          else if (method == "price")
+          {
+             weights = {
+              rating : 0.3,
+              distance:0.05,
+              powered:0.25,
+              price:0.4
+            };
+          }
 
 
           var index_store = [];
           var w_rating;
           var w_powered;
           var w_distance;
+          var w_price;
 
           for(i=0;i<list.length;i++)
           {
@@ -78,7 +88,43 @@ module.exports = {
 
             }
 
-            index_store.push({index:i , rank: w_rating + w_powered + w_distance});
+            if(method == "price")
+            {
+              if(typeof list[i].price != "undefined")
+              {
+                if (list[i].price == 1)
+                {
+                  w_price = 10* weights.price;
+                }
+                else if (list[i].price == 2)
+                {
+                  w_price = 8* weights.price;
+                }
+                else if (list[i].price == 3)
+                {
+                  w_price = 6* weights.price;
+                }
+                else if (list[i].price == 4)
+                {
+                  w_price = 4* weights.price;
+                }
+
+                index_store.push({index:i , rank: w_rating + w_powered + w_distance + w_price});
+              }
+
+
+
+
+            }
+            else {
+
+              index_store.push({index:i , rank: w_rating + w_powered + w_distance});
+
+            }
+
+
+
+
 
           }
 
