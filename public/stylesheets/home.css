@@ -1,0 +1,106 @@
+
+
+
+body {
+  background-color : white;
+  margin:  0;
+  padding: 0;
+}
+
+#wrapper {
+    width: 960px ;
+    margin: 0 auto;
+
+}
+
+
+#TopBar {
+	background-color : #0092ff;
+  width:100%;
+	height: 60px;
+	border-top:  1px solid #0092ff;
+	box-shadow:0px 2px 3px #3c3c3c;
+  position: relative;
+	}
+#TopBar h2 {
+  color: #f7f7f7;
+  font: 26px "Comic Sans MS", cursive, sans-serif;
+  position: relative;
+  transform: translateY(-37%);
+}
+
+#SecondBar {
+	background-color : #eaeeef;
+  width:100%;
+	height: 250px;
+	border-bottom:  1px solid #c3c6c0;
+  position: relative;
+	}
+
+  table {
+      border-collapse: collapse;
+      width: 100%;
+
+  }
+
+  table, th, td {
+      border: 1px solid  #0092ff;
+      text-align: left;
+      padding: 15px;
+
+
+  }
+
+
+
+  th{
+
+    background-color :#eaeeef;
+
+
+
+  }
+
+  #url{
+    border:  1px solid  #0092ff;
+    padding: 10px;
+    background-color :#eaeeef;
+    border-radius: 10px;
+
+  }
+  #main{
+    width: 700px;
+    position: relative;
+    float:left;
+    top:-30px;
+
+  }
+
+  #pin{
+  float: right;
+  position: relative;
+  left:-30px;
+  top:-47px;
+  }
+
+  #logos{
+
+    position: relative;
+    float:right;
+
+  }
+  #copy{
+
+    position: relative;
+    float:left;
+
+  }
+
+  #bottomBar {
+  	background-color : #eaeeef;
+    width:100%;
+  	height: 50px;
+  	border-top:  1px solid #0092ff;
+  	box-shadow:0px 2px 3px #3c3c3c;
+    position: relative;
+  	}

@@ -52,7 +52,7 @@ router.use(function(req, res, next) {
 // route that our documentation will be (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
 
-      res.render('index', { title: 'Express' });
+      res.render('index', { title: 'iVenues' });
 });
 
 

@@ -1,5 +1,107 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to our API Documentation page --testing
+
+
+      #SecondBar
+        #TopBar
+          #wrapper
+            h2 i-Venues API
+        #wrapper
+          h2 What the API is about?
+          p#main Welcome to our API Documentation page --test Getting started with the Yelp API is easy as pie.
+            Or even as easy as doing a Yelp search for pie. The documentation below is your roadmap to get started.
+            Gain easy access to search results and local business information from over 50 million businesses in 27 countries. That’s a lot of pie, so we hope you saved room.
+          img#pin(src='/images/mappin.png')
+      #wrapper
+        h2 Documentation
+        p The API uses HTTP GET request to retrieve the data.
+          br
+          br
+          h3 Query parameters:
+          table
+            tr
+              th(width='25%') Parameter
+              th(width='20%') Example
+              th(width='20%') Required / Optional
+              th(width='35%') Description
+
+            tr
+              td query
+              td pizza
+              td required
+              td pgr egegwe rgewr gwergewrg ergwergfffff fffffff fff fffergerg ergerg w fddd grqgqg qeg qerg qegqegqekgr qegrgleqg qr qgrqlglrg qrlg qrlgqrgqwlg
+            tr
+              td location
+              td 55.948585,-3.186797
+              td required
+              td gregegwergewrgwergewrgergwergergergergergw
+            tr
+              td radius
+              td 1000
+              td optional
+              td gregegwergewrgwergewrgergwergergergergergw
+            tr
+              td rankby
+              td distance
+              td optional
+              td gregegwergewrgwergewrgergwergergergergergw
+            tr
+              td limit
+              td 10
+              td optional
+              td gregegwergewrgwergewrgergwergergergergergw
+        br
+        h3 A sample example of a request:
+        p#url http://localhost:8080/api
+
+        br
+        h3 Response fields:
+
+
+        table
+          tr
+            th(width='20%') Field
+            th(width='20%') Type
+            th(width='40%') Description
+            th(width='20%') Always in response
+          tr
+            td name
+            td String
+            td The name of the Venue.
+            td yes
+          tr
+            td name
+            td String
+            td The name of the Venue.
+            td yes
+          tr
+            td name
+            td String
+            td The name of the Venue.
+            td yes
+          tr
+            td name
+            td String
+            td The name of the Venue.
+            td yes
+
+
+
+        br
+        br
+        br
+        br
+        br
+        br
+
+      #bottomBar
+        #wrapper
+          p#copy Copyright &copy; 2015 Ioannis Georgoulas
+          #logos
+            a(href='https://developers.google.com/places/')
+              img(src='/images/google2.png')
+            a(href='https://www.yelp.co.uk/developers')
+              img(src='/images/yelp.png')
+            a(href='https://developer.foursquare.com/')
+              img(src='/images/foursq2.png',style='height:30px;')
