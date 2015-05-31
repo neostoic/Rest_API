@@ -20,7 +20,6 @@ var VenueSchema   = new Schema({
       address: String // in this format -> e.g. 17 Great Junction Street, Edinburgh
     },
     price: Number, // scale of 4, 1-2-3-4
-    //money : Number, // Based on Google in the US, 1 is < $10, 2 is $10-$20, 3 is $20-$30, 4 is > $30.
     distance: Number, // meters from location search
     rating: Number, //  scale of 10
     other:{

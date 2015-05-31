@@ -59,7 +59,7 @@ router.get('/', function(req, res) {
 
 
 //This is the get method that we will do the search on API for restorants
-router.route('/search')
+router.route('/api/search')
 
     .get(function(req, res) {
 
@@ -267,7 +267,7 @@ router.route('/bears')
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use('/api', router);
+app.use('/', router);
 
 // START THE SERVER
 // =============================================================================

@@ -73,7 +73,7 @@ body {
     position: relative;
     float:left;
     top:-30px;
-
+    font: 16px "Comic Sans MS", cursive, sans-serif;
   }
 
   #pin{
@@ -81,7 +81,41 @@ body {
   position: relative;
   left:-30px;
   top:-47px;
+
+
+
+    animation-name: dropHeader;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
+
   }
+
+
+  @-moz-keyframes dropHeader {
+    0% {
+        -moz-transform: translateY(-230px);
+    }
+    100% {
+        -moz-transform: translateY(0);
+    }
+ }
+ @-webkit-keyframes dropHeader {
+    0% {
+        -webkit-transform: translateY(-230px);
+    }
+    100% {
+        -webkit-transform: translateY(0);
+    }
+}
+@keyframes dropHeader {
+    0% {
+        transform: translateY(-230px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+
 
   #logos{
 

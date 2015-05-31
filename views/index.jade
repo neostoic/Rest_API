@@ -8,14 +8,14 @@ block content
           #wrapper
             h2 i-Venues API
         #wrapper
-          h2 What the API is about?
-          p#main Welcome to our API Documentation page --test Getting started with the Yelp API is easy as pie.
-            Or even as easy as doing a Yelp search for pie. The documentation below is your roadmap to get started.
-            Gain easy access to search results and local business information from over 50 million businesses in 27 countries. That’s a lot of pie, so we hope you saved room.
+          h2 What is the i-Venues API?
+          br
+          p#main i-Venues is an API that recommends food and drink venues based on search criteria.The provided recommendations are a result of an on-air integration of Foursguare, Google Places and Yelp data. The API have been developed for research reasons.
           img#pin(src='/images/mappin.png')
       #wrapper
         h2 Documentation
-        p The API uses HTTP GET request to retrieve the data.
+        p The API doesn't require any kind of authentication in order to be used.
+        p The API uses HTTP GET request to retrieve the data; with the following parameters.
           br
           br
           h3 Query parameters:
@@ -27,36 +27,42 @@ block content
               th(width='35%') Description
 
             tr
-              td query
+              td
+                b query
               td pizza
               td required
-              td pgr egegwe rgewr gwergewrg ergwergfffff fffffff fff fffergerg ergerg w fddd grqgqg qeg qerg qegqegqekgr qegrgleqg qr qgrqlglrg qrlg qrlgqrgqwlg
+              td A term to be searched(e.g. "pub", "italian food").
             tr
-              td location
+              td
+                b location
               td 55.948585,-3.186797
               td required
-              td gregegwergewrgwergewrgergwergergergergergw
+              td Latitude and longitude of the location that the search will took part.
             tr
-              td radius
+              td
+                b  radius
               td 1000
               td optional
-              td gregegwergewrgwergewrgergwergergergergergw
+              td Radius to search within, in meters. If the radius is not specified, 10000 meters radius will be used by default. The max number of radius is 40000.
             tr
-              td rankby
+              td
+                b  rankby
               td distance
               td optional
-              td gregegwergewrgwergewrgergwergergergergergw
+              td Specifies the order in which results are listed. If it is not specified 'best' is the default option. Other options are 'distance', to rank venues that are closer first and 'price' that returns cheapest venues first.
             tr
-              td limit
+              td
+                b  limit
               td 10
               td optional
-              td gregegwergewrgwergewrgergwergergergergergw
+              td Limit is the number of results to be returned. If it is not specified 20 venues will be returned (20 is the max number).
         br
         h3 A sample example of a request:
-        p#url http://localhost:8080/api
+        p#url http://venues.herokuapp.com/api/search?query=pizza&location=55.948585,-3.186797&limit=1
 
         br
-        h3 Response fields:
+        h3 Response
+        p API responds with a JSON file. The respond fields for each venue are shown in the following table.
 
 
         table
@@ -66,30 +72,81 @@ block content
             th(width='40%') Description
             th(width='20%') Always in response
           tr
-            td name
+            td
+              b  name
             td String
             td The name of the Venue.
             td yes
           tr
-            td name
-            td String
-            td The name of the Venue.
+            td
+              b  lat
+            td Number
+            td The latitude of the Venue.
             td yes
           tr
-            td name
-            td String
-            td The name of the Venue.
+            td
+              b  lon
+            td Number
+            td The longitude of the Venue.
             td yes
           tr
-            td name
+            td
+              b  address
             td String
-            td The name of the Venue.
+            td The adrress of the Venue in the following format:   17 Morrison Street, Edinburgh.
             td yes
+          tr
+            td
+              b  price
+            td Number
+            td The price tag of the Venue. The scale is 1 to 4. 1 is the cheapest and 4 the most expensive.
+            td no
+          tr
+            td
+              b  distance
+            td Number
+            td Distance in meters of the location of the search.
+            td yes
+          tr
+            td
+              b  rating
+            td Number
+            td The rating of the Venue from 1.0 to 10.0
+            td yes
+          tr
+            td
+              b  checkins
+            td Number
+            td Check-ins made in the Foursquare.
+            td no
+          tr
+            td
+              b  timestamp
+            td Number
+            td Timestamp of the request.
+            td yes
+          tr
+            td
+              b  openNow
+            td Boolean
+            td Informs if the venue is currently open with 'yes' or 'no'.
+            td no
+          tr
+            td
+              b  phone
+            td String
+            td The phone number of the Venue.
+            td no
+          tr
+            td
+              b  poweredBy
+            td Array of Strings
+            td In this array are all the APIs that contributed in the integration of the data of the specific venue. Possible values are: 'Foursquare', 'Google' and 'Yelp'.
+            td no
 
 
 
-        br
-        br
+
         br
         br
         br
@@ -102,6 +159,6 @@ block content
             a(href='https://developers.google.com/places/')
               img(src='/images/google2.png')
             a(href='https://www.yelp.co.uk/developers')
-              img(src='/images/yelp.png')
+              img(src='/images/Yelp.png')
             a(href='https://developer.foursquare.com/')
               img(src='/images/foursq2.png',style='height:30px;')
