@@ -39,6 +39,31 @@ var port = process.env.PORT || 8080;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
+// Enables CORS
+var enableCORS = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      console.log(' ');
+      console.log('------------A request just arrived.------------');
+      next();
+    }
+};
+
+
+// enable CORS!
+router.use(enableCORS);
+
+
+
+
+/*
 
 // middleware to use for all requests -- add validity checks
 router.use(function(req, res, next) {
@@ -48,7 +73,7 @@ router.use(function(req, res, next) {
     next(); // make sure we go to the next routes and don't stop here
 });
 
-
+*/
 // route that our documentation will be (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
 
@@ -263,6 +288,8 @@ router.route('/bears')
    });
 
 */
+
+
 
 
 // REGISTER OUR ROUTES -------------------------------
