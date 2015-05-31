@@ -205,7 +205,7 @@ module.exports = {
       //  console.log('results = ', results);
       var limited = results.recommendation.slice(0, limit);
 
-        callback({foursquare: original_foursquare , google: original_google , yelp: original_yelp, ranked:limited}); // callback of main function
+        callback({iVenues:limited , rest:{foursquare: original_foursquare , google: original_google , yelp: original_yelp}}); // callback of main function
     });
 
 
