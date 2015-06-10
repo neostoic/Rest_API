@@ -44,14 +44,16 @@ module.exports = {
       v:'20150228',
       query:params.query,
       limit:'20',
-      radius:'10000'
+      radius:'10000',
+      locale:"en"
       };
 
       var google_param = {
         location:[coordinates[0],coordinates[1]],
         radius: '10000',
         keyword: params.query,
-        types:'bakery|bar|cafe|food|night_club|restaurant'
+        types:'bakery|bar|cafe|food|night_club|restaurant',
+        language: "en"
       };
 
 
@@ -110,7 +112,7 @@ module.exports = {
 
 
             yelp.search(yelp_param, function(err, data) {
-              if(err) { console.log(err); return; }
+              if(err) { var map =[]; callback(null, map);console.log(err); return; }
               else {
                     original_yelp = data.businesses;
                     var map =[];
