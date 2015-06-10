@@ -22,6 +22,8 @@ module.exports = {
     var similarity = [];
     var index_store = [];
 
+    if(listA.length != 0)
+    {
     for(i=0;i<listA.length;i++)
     {
       for(j=0;j<listB.length;j++)
@@ -147,7 +149,11 @@ module.exports = {
 
       }
     }
+}
+else{
 
+  return new_list = listB;
+}
 
   return new_list;// return venues_matching function
 
