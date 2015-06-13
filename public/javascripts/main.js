@@ -52,7 +52,7 @@ module.exports = {
         location:[coordinates[0],coordinates[1]],
         radius: '10000',
         keyword: params.query,
-        types:'bakery|bar|cafe|food|night_club|restaurant',
+        types:'bakery|bar|cafe|food|night_club|restaurant|amusement_park|art_gallery|park|museum',
         language: "en"
       };
 
