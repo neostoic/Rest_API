@@ -39,7 +39,7 @@ module.exports = {
           {
             //calculation of the distance between the two given pair of coordinates
             var distance = location_matching(listA[i].location.lat,listA[i].location.lon,listB[j].location.lat,listB[j].location.lon);
-            if(distance<=max_distance)
+            if(distance<=max_distance || (distance<=500 && similarity == 100))
             {
 
               //store the index of the listB

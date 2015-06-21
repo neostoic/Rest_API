@@ -178,7 +178,7 @@ module.exports = {
           var hrstart5 = process.hrtime();
 
           var sendd = results.google_data;
-          var match =  matching.venues_matching(results.foursquare_data,results.google_data,0.40,49);
+          var match =  matching.venues_matching(results.foursquare_data,results.google_data,0.40,45);
 
           hrend5 = process.hrtime(hrstart5);
           console.log("Matching and integration (Foursquare - Google) completed in : %ds %dms", hrend5[0], hrend5[1]/1000000);
@@ -188,7 +188,7 @@ module.exports = {
 
           var hrstart5 = process.hrtime();
 
-          var match =  matching.venues_matching(results.matching,results.yelp_data,0.40,49);
+          var match =  matching.venues_matching(results.matching,results.yelp_data,0.40,45);
 
           hrend5 = process.hrtime(hrstart5);
           console.log("Matching and integration (Old - Yelp) completed in : %ds %dms", hrend5[0], hrend5[1]/1000000);
